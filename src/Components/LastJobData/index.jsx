@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
 export default class index extends Component {
+
   render() {
-    const { formsControl, handleForms } = this.props;
+    const { formsControl, handleForms, showAlert } = this.props;
     return (
       <fieldset>
         <span className="labelText">Resumo:</span>
@@ -14,7 +15,7 @@ export default class index extends Component {
             name="summaryArea"
             id="summaryArea"
             value={formsControl.summary}
-            onChange={({target:{value}}) => handleForms('summary', value)}
+            onChange={({ target: { value } }) => handleForms('summary', value)}
           />
         </label>
         <label htmlFor="roleInput">
@@ -25,7 +26,8 @@ export default class index extends Component {
             name="roleInput"
             id="roleInput"
             value={formsControl.role}
-            onChange={({target:{value}}) => handleForms('role', value)}
+            onChange={({ target: { value } }) => handleForms('role', value)}
+            onClick={showAlert}
           />
         </label>
         <label htmlFor="">
@@ -37,7 +39,7 @@ export default class index extends Component {
             name="roleArea"
             id="roleArea"
             value={formsControl.roleDescription}
-            onChange={({target:{value}}) => handleForms('roleDescription', value)}
+            onChange={({ target: { value } }) => handleForms('roleDescription', value)}
           />
         </label>
       </fieldset>

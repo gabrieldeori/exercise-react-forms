@@ -3,6 +3,23 @@ import brazillianStates from '../../Database/brazillianStates';
 import brazillianCities from '../../Database/brazillianCities';
 
 export default class index extends Component {
+  constructor(props) {
+    super(props);
+    this.noSpecialChar = this.noSpecialChar.bind(this);
+  }
+
+  noSpecialChar(stringChange) {
+    stringChange = stringChange.replace(/[áàãâä]/ui, 'a');
+    stringChange = stringChange.replace(/[éèêë]/ui, 'e');
+    stringChange = stringChange.replace(/[íìîï]/ui, 'i');
+    stringChange = stringChange.replace(/[óòõôö]/ui, 'o');
+    stringChange = stringChange.replace(/[úùûü]/ui, 'u');
+    stringChange = stringChange.replace(/[ç]/ui, 'c');
+    stringChange = stringChange.replace(/[^a-z0-9]/i, '_');
+    stringChange = stringChange.replace(/_+/, '_'); //
+    return stringChange;
+  }
+
   render() {
     const { formsControl, handleForms } = this.props;
     return (
@@ -10,14 +27,14 @@ export default class index extends Component {
         <label htmlFor="nameInput">
           <span className="labelText">Nome:</span>
           <input
-          maxLength="40"
+            maxLength="40"
             placeholder="Ex.: SEU NOME"
             type="text"
             name="nameInput"
             id="nameInput"
             value={formsControl.name}
             onChange={
-              ({ target: { value } }) => handleForms('name', value)
+              ({ target: { value } }) => handleForms('name', value.toUpperCase())
             }
             required
           />
@@ -53,16 +70,16 @@ export default class index extends Component {
           />
         </label>
         <label htmlFor="addressInput">
-          <span className="labelText">Address:</span>
+          <span className="labelText">Endereço:</span>
           <input
             maxLength="200"
-            placeholder="Ex.: Rua das flores, 200, São Valentim"
+            placeholder="Ex.: Rua das flores, 200, Sao Valentim"
             type="text"
             name="addressInput"
             id="addressInput"
             value={formsControl.address}
             onChange={
-              ({ target: { value } }) => handleForms('address', value)
+              ({ target: { value } }) => handleForms('address', this.noSpecialChar(value))
             }
             required
           />
@@ -101,7 +118,7 @@ export default class index extends Component {
             required
           >
             {
-              brazillianStates.map(({ native, name, objectId }) =>
+              brazillianStates.map(({ native, objectId }) =>
                 <option key={objectId} value={native}>
                   {native}
                 </option>

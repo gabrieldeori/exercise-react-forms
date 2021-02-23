@@ -16,9 +16,11 @@ export default class index extends Component {
         summary: '',
         role: '',
         roleDescription: '',
+        showAlert: true,
       },
     };
     this.handleForms = this.handleForms.bind(this);
+    this.showAlert = this.showAlert.bind(this);
   };
 
   handleForms(key, value) {
@@ -32,6 +34,19 @@ export default class index extends Component {
     });
   }
 
+  showAlert() {
+    const { formsControl: { showAlert } } = this.state;
+    showAlert === true && window.alert('Preencha com cuidado esta informação.')
+      this.setState((prevState) => {
+        return {
+          formsControl: {
+            ...prevState.formsControl,
+            showAlert: false,
+          },
+        };
+      });
+  }
+
   render() {
     const { formsControl } = this.state;
     return (
@@ -39,7 +54,7 @@ export default class index extends Component {
         InitialPage
         <form>
           <PersonalData formsControl={formsControl} handleForms={this.handleForms} />
-          <LastJobData formsControl={formsControl} handleForms={this.handleForms} />
+          <LastJobData showAlert={this.showAlert} formsControl={formsControl} handleForms={this.handleForms} />
         </form>
         <button type="button">Consolidar</button>
         <button type="button">Limpar</button>
