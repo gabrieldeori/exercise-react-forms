@@ -41,6 +41,8 @@ export default class index extends Component {
           <PersonalData formsControl={formsControl} handleForms={this.handleForms} />
           <LastJobData formsControl={formsControl} handleForms={this.handleForms} />
         </form>
+        <button type="button">Consolidar</button>
+        <button type="button">Limpar</button>
       </div>
     );
   };
