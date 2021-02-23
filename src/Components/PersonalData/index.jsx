@@ -10,6 +10,7 @@ export default class index extends Component {
         <label htmlFor="nameInput">
           <span className="labelText">Nome:</span>
           <input
+          maxLength="40"
             placeholder="Ex.: SEU NOME"
             type="text"
             name="nameInput"
@@ -24,6 +25,7 @@ export default class index extends Component {
         <label htmlFor="emailInput">
           <span className="labelText">Email:</span>
           <input
+            maxLength="50"
             placeholder="Ex.: anything@something.com"
             type="text"
             name="emailInput"
@@ -38,6 +40,7 @@ export default class index extends Component {
         <label htmlFor="cpfInput">
           <span className="labelText">CPF:</span>
           <input
+            maxLength="11"
             placeholder="Ex.: 000.000.000-00"
             type="text"
             name="cpfInput"
@@ -52,6 +55,7 @@ export default class index extends Component {
         <label htmlFor="addressInput">
           <span className="labelText">Address:</span>
           <input
+            maxLength="200"
             placeholder="Ex.: Rua das flores, 200, São Valentim"
             type="text"
             name="addressInput"
@@ -66,6 +70,7 @@ export default class index extends Component {
         <label htmlFor="cityInput">
           <span className="labelText">Cidade:</span>
           <select
+            maxLength="28"
             name="cityInput"
             id="cityInput"
             value={formsControl.city}
