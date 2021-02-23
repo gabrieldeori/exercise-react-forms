@@ -17,5 +17,5 @@ export default function FormsReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     default:
       return state;
-  }
-}
+  };
+};
