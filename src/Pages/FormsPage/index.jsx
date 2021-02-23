@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LastJobData, PersonalData } from '../../Components';
+import { LastJobData, PersonalData, Curriculum } from '../../Components';
 
 export default class index extends Component {
   constructor(props) {
@@ -17,6 +17,7 @@ export default class index extends Component {
         role: '',
         roleDescription: '',
         showAlert: true,
+        showCurriculum: false,
       },
     };
     this.handleForms = this.handleForms.bind(this);
@@ -49,6 +50,7 @@ export default class index extends Component {
 
   render() {
     const { formsControl } = this.state;
+    const { showCurriculum } = formsControl;
     return (
       <div>
         InitialPage
@@ -56,8 +58,14 @@ export default class index extends Component {
           <PersonalData formsControl={formsControl} handleForms={this.handleForms} />
           <LastJobData showAlert={this.showAlert} formsControl={formsControl} handleForms={this.handleForms} />
         </form>
-        <button type="button">Consolidar</button>
+        <button type="button" onClick={() => this.handleForms('showCurriculum', true)}>Consolidar</button>
         <button type="button">Limpar</button>
+        {
+        showCurriculum === true &&
+          <div>
+            <Curriculum formsControl={formsControl}/>
+          </div>
+        }
       </div>
     );
   };
