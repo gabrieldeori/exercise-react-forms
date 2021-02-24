@@ -2,7 +2,7 @@ import {
   HANDLE_FORMS_NAME, HANDLE_FORMS_EMAIL, HANDLE_FORMS_CPF,
   HANDLE_FORMS_ADDRESS, HANDLE_FORMS_CITY, HANDLE_FORMS_STATE,
   HANDLE_FORMS_HOME, HANDLE_FORMS_SUMMARY, HANDLE_FORMS_ROLE,
-  HANDLE_FORMS_ROLE_DESCRIPTION,
+  HANDLE_FORMS_ROLE_DESCRIPTION, HANDLE_FORMS_CLEAR,
 } from '../../Actions/FormsActions';
 import { noSpecialChar, cpfMask } from '../../../Services/formsFunctions';
 
@@ -75,6 +75,8 @@ export default function FormsReducer(state = INITIAL_STATE, { type, payload }) {
         ...state,
         roleDescription: payload.event.target.value,
       }
+    case HANDLE_FORMS_CLEAR:
+      return INITIAL_STATE;
     default:
       return state;
   };
