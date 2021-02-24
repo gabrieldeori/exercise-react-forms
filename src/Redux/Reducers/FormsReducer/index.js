@@ -2,8 +2,7 @@ import {
   HANDLE_FORMS_NAME, HANDLE_FORMS_EMAIL, HANDLE_FORMS_CPF,
   HANDLE_FORMS_ADDRESS, HANDLE_FORMS_CITY, HANDLE_FORMS_STATE,
   HANDLE_FORMS_HOME, HANDLE_FORMS_SUMMARY, HANDLE_FORMS_ROLE,
-  HANDLE_FORMS_ROLE_DESCRIPTION, HANDLE_FORMS_SHOW_CURRICULUM,
-  HANDLE_FORMS_SHOW_ALERT
+  HANDLE_FORMS_ROLE_DESCRIPTION,
 } from '../../Actions/FormsActions';
 import { noSpecialChar, cpfMask } from '../../../Services/formsFunctions';
 
@@ -18,8 +17,6 @@ const INITIAL_STATE = {
   summary: '',
   role: '',
   roleDescription: '',
-  showAlert: true,
-  showCurriculum: false,
 }
 
 export default function FormsReducer(state = INITIAL_STATE, { type, payload }) {
@@ -77,11 +74,6 @@ export default function FormsReducer(state = INITIAL_STATE, { type, payload }) {
       return {
         ...state,
         roleDescription: payload.event.target.value,
-      }
-    case HANDLE_FORMS_SHOW_ALERT:
-      return {
-        ...state,
-        showAlert: false,
       }
     default:
       return state;

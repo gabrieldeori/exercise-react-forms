@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { handleFormsSummary, handleFormsRole, handleFormsRoleDescription, handleFormsShowAlert } from '../../Redux/Actions/FormsActions';
+import { handleFormsSummary, handleFormsRole, handleFormsRoleDescription } from '../../Redux/Actions/FormsActions';
 
 class index extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showAlert: true,
+    }
     this.showAlert = this.showAlert.bind(this);
   }
 
   showAlert() {
-    const { showAlert, formsShowAlert } = this.props;
+    const { showAlert } = this.state;
     if (showAlert === true) {
       window.alert('Preencha com cuidado esta informação.')
-      formsShowAlert();
     }
+    this.setState({
+      showAlert: false,
+    });
   }
 
   render() {
@@ -76,7 +81,6 @@ function mapDispatchToProps(dispatch) {
     formsSummary: (event) => dispatch(handleFormsSummary(event)),
     formsRole: (event) => dispatch(handleFormsRole(event)),
     formsRoleDescription: (event) => dispatch(handleFormsRoleDescription(event)),
-    formsShowAlert: () => dispatch(handleFormsShowAlert()),
   };
 }
 

@@ -8,8 +8,6 @@ export const HANDLE_FORMS_HOME = 'HANDLE_FORMS_HOME';
 export const HANDLE_FORMS_SUMMARY = 'HANDLE_FORMS_SUMMARY';
 export const HANDLE_FORMS_ROLE = 'HANDLE_FORMS_ROLE';
 export const HANDLE_FORMS_ROLE_DESCRIPTION = 'HANDLE_FORMS_ROLE_DESCRIPTION';
-export const HANDLE_FORMS_SHOW_ALERT = 'SHOW_ALERT';
-export const HANDLE_FORMS_SHOW_CURRICULUM = 'SHOW_CURRICULUM';
 
 export function handleFormsName(event) {
   event.target.value = event.target.value.toUpperCase();
@@ -99,11 +97,5 @@ export function handleFormsRoleDescription(event) {
     payload: {
       event,
     },
-  };
-}
-
-export function handleFormsShowAlert(event) {
-  return {
-    type: HANDLE_FORMS_SHOW_ALERT,
   };
 }
