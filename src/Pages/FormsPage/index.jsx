@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { LastJobData, PersonalData, Curriculum } from '../../Components';
 
 export default class index extends Component {
-  constructor(props) {
+/*   constructor(props) {
     super(props)
     this.state = {
       formsControl: {
@@ -74,33 +74,26 @@ export default class index extends Component {
         },
       };
     });
-  }
+  } */
 
   render() {
-    const { formsControl } = this.state;
-    const { showCurriculum } = formsControl;
     return (
       <div>
-        InitialPage
+        Form With Redux
         <form>
-          <PersonalData formsControl={formsControl} handleForms={this.handleForms} />
-          <LastJobData showAlert={this.showAlert} formsControl={formsControl} handleForms={this.handleForms} />
+          <PersonalData />
+          <LastJobData />
         </form>
         <button
           type="button"
-          onClick={ () =>
-          this.checkEmail() === true ?
-            this.handleForms('showCurriculum', true) :
-            window.alert('Email Inválido')
-          }
         >
           Consolidar
         </button>
-        <button type="button" onClick={this.clearForms}>Limpar</button>
+        <button type="button">Limpar</button>
         {
-          showCurriculum === true &&
+          true &&
           <div>
-            <Curriculum formsControl={formsControl} />
+            <Curriculum />
           </div>
         }
       </div>

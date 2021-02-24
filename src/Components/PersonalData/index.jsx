@@ -32,10 +32,6 @@ export default class index extends Component {
             type="text"
             name="nameInput"
             id="nameInput"
-            value={formsControl.name}
-            onChange={
-              ({ target: { value } }) => handleForms('name', value.toUpperCase())
-            }
             required
           />
         </label>
@@ -47,10 +43,6 @@ export default class index extends Component {
             type="text"
             name="emailInput"
             id="emailInput"
-            value={formsControl.email}
-            onChange={
-              ({ target: { value } }) => handleForms('email', value)
-            }
             required
           />
         </label>
@@ -62,10 +54,6 @@ export default class index extends Component {
             type="text"
             name="cpfInput"
             id="cpfInput"
-            value={formsControl.cpf}
-            onChange={
-              ({ target: { value } }) => handleForms('cpf', value)
-            }
             required
           />
         </label>
@@ -77,10 +65,6 @@ export default class index extends Component {
             type="text"
             name="addressInput"
             id="addressInput"
-            value={formsControl.address}
-            onChange={
-              ({ target: { value } }) => handleForms('address', this.noSpecialChar(value))
-            }
             required
           />
         </label>
@@ -90,15 +74,11 @@ export default class index extends Component {
             maxLength="28"
             name="cityInput"
             id="cityInput"
-            value={formsControl.city}
-            onChange={
-              ({ target: { value } }) => handleForms('city', value)
-            }
             required
           >
             {
               brazillianCities.map(({ city, admin_name }) =>
-                formsControl.state === admin_name &&
+                'Amapá' === admin_name &&
                 <option key={city} value={city}>
                   {city}
                 </option>
@@ -111,10 +91,6 @@ export default class index extends Component {
           <select
             name="stateInput"
             id="stateInput"
-            value={formsControl.state}
-            onChange={
-              ({ target: { value } }) => handleForms('state', value)
-            }
             required
           >
             {
@@ -134,9 +110,6 @@ export default class index extends Component {
               name="homeInput"
               id="homeInput"
               value="Casa"
-              onChange={
-                ({ target: { value } }) => handleForms('home', value)
-              }
               required
             />
             <span className="radio-label-text">Casa</span>
@@ -147,9 +120,6 @@ export default class index extends Component {
               name="homeInput"
               id="homeInput2"
               value="Apartamento"
-              onChange={
-                ({ target: { value } }) => handleForms('home', value)
-              }
               required
             />
             <span className="radio-label-text">Apartamento</span>
