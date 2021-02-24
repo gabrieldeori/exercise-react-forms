@@ -1,27 +1,15 @@
 import React, { Component } from 'react';
 import brazillianStates from '../../Database/brazillianStates';
 import brazillianCities from '../../Database/brazillianCities';
+import { connect } from 'react-redux';
+import { handleFormsName, handleFormsEmail, handleFormsCpf, handleFormsAddress,
+  handleFormsCity, handleFormsState, handleFormsHome
+} from '../../Redux/Actions/FormsActions';
 
-export default class index extends Component {
-  constructor(props) {
-    super(props);
-    this.noSpecialChar = this.noSpecialChar.bind(this);
-  }
-
-  noSpecialChar(stringChange) {
-    stringChange = stringChange.replace(/[áàãâä]/ui, 'a');
-    stringChange = stringChange.replace(/[éèêë]/ui, 'e');
-    stringChange = stringChange.replace(/[íìîï]/ui, 'i');
-    stringChange = stringChange.replace(/[óòõôö]/ui, 'o');
-    stringChange = stringChange.replace(/[úùûü]/ui, 'u');
-    stringChange = stringChange.replace(/[ç]/ui, 'c');
-    stringChange = stringChange.replace(/[^a-z0-9]/i, '_');
-    stringChange = stringChange.replace(/_+/, '_'); //
-    return stringChange;
-  }
-
+class index extends Component {
   render() {
-    const { formsControl, handleForms } = this.props;
+    const { name, email, cpf, address, city, state, home, formsName, formsEmail, formsCpf,
+      formsAddress, formsCity, formsState, formsHome } = this.props;
     return (
       <fieldset>
         <label htmlFor="nameInput">
@@ -33,6 +21,8 @@ export default class index extends Component {
             name="nameInput"
             id="nameInput"
             required
+            value={name}
+            onChange={(event) => formsName(event)}
           />
         </label>
         <label htmlFor="emailInput">
@@ -44,17 +34,21 @@ export default class index extends Component {
             name="emailInput"
             id="emailInput"
             required
+            value={email}
+            onChange={(event) => formsEmail(event)}
           />
         </label>
         <label htmlFor="cpfInput">
           <span className="labelText">CPF:</span>
           <input
-            maxLength="11"
-            placeholder="Ex.: 000.000.000-00"
+            maxLength="14"
+            placeholder="000.000.000-00"
             type="text"
             name="cpfInput"
             id="cpfInput"
             required
+            value={cpf}
+            onChange={(event) => formsCpf(event)}
           />
         </label>
         <label htmlFor="addressInput">
@@ -66,6 +60,8 @@ export default class index extends Component {
             name="addressInput"
             id="addressInput"
             required
+            value={address}
+            onChange={(event) => formsAddress(event)}
           />
         </label>
         <label htmlFor="cityInput">
@@ -75,10 +71,12 @@ export default class index extends Component {
             name="cityInput"
             id="cityInput"
             required
+            value={city}
+            onChange={(event) => formsCity(event)}
           >
             {
               brazillianCities.map(({ city, admin_name }) =>
-                'Amapá' === admin_name &&
+                state === admin_name &&
                 <option key={city} value={city}>
                   {city}
                 </option>
@@ -92,6 +90,8 @@ export default class index extends Component {
             name="stateInput"
             id="stateInput"
             required
+            value={state}
+            onChange={(event) => formsState(event)}
           >
             {
               brazillianStates.map(({ native, objectId }) =>
@@ -110,7 +110,9 @@ export default class index extends Component {
               name="homeInput"
               id="homeInput"
               value="Casa"
+              checked={home === "Casa"}
               required
+              onChange={(event) => formsHome(event)}
             />
             <span className="radio-label-text">Casa</span>
           </label>
@@ -120,7 +122,9 @@ export default class index extends Component {
               name="homeInput"
               id="homeInput2"
               value="Apartamento"
+              checked={home === "Apartamento"}
               required
+              onChange={(event) => formsHome(event)}
             />
             <span className="radio-label-text">Apartamento</span>
           </label>
@@ -129,3 +133,30 @@ export default class index extends Component {
     );
   };
 }
+
+function mapStateToProps(state) {
+  return {
+    name: state.forms.name,
+    email: state.forms.email,
+    cpf: state.forms.cpf,
+    address: state.forms.address,
+    city: state.forms.city,
+    state: state.forms.state,
+    home: state.forms.home,
+    showAlert: state.forms.showAlert,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    formsName: (event) => dispatch(handleFormsName(event)),
+    formsEmail: (event) => dispatch(handleFormsEmail(event)),
+    formsCpf: (event) => dispatch(handleFormsCpf(event)),
+    formsAddress: (event) => dispatch(handleFormsAddress(event)),
+    formsCity: (event) => dispatch(handleFormsCity(event)),
+    formsState: (event) => dispatch(handleFormsState(event)),
+    formsHome: (event) => dispatch(handleFormsHome(event)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(index);

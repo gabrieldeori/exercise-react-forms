@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { handleFormsSummary, handleFormsRole, handleFormsRoleDescription } from '../../Redux/Actions/FormsActions';
 
-export default class index extends Component {
-
+class index extends Component {
   render() {
+    const { summary, role, roleDescription, formsSummary, formsRole,
+      formsRoleDescription } = this.props;
     return (
       <fieldset>
         <span className="labelText">Resumo:</span>
@@ -13,6 +16,8 @@ export default class index extends Component {
             maxLength="1000"
             name="summaryArea"
             id="summaryArea"
+            value={summary}
+            onChange={(event) => formsSummary(event)}
           />
         </label>
         <label htmlFor="roleInput">
@@ -22,6 +27,8 @@ export default class index extends Component {
             type="text"
             name="roleInput"
             id="roleInput"
+            value={role}
+            onChange={(event) => formsRole(event)}
           />
         </label>
         <label htmlFor="">
@@ -32,9 +39,29 @@ export default class index extends Component {
             maxLength="500"
             name="roleArea"
             id="roleArea"
+            value={roleDescription}
+            onChange={(event) => formsRoleDescription(event)}
           />
         </label>
       </fieldset>
     );
   };
 }
+
+function mapStateToProps(state) {
+  return {
+    summary: state.forms.summary,
+    role: state.forms.role,
+    roleDescription: state.forms.roleDescription,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    formsSummary: (event) => dispatch(handleFormsSummary(event)),
+    formsRole: (event) => dispatch(handleFormsRole(event)),
+    formsRoleDescription: (event) => dispatch(handleFormsRoleDescription(event)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(index);
