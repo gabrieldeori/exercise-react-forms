@@ -101,3 +101,9 @@ export function handleFormsRoleDescription(event) {
     },
   };
 }
+
+export function handleFormsShowAlert(event) {
+  return {
+    type: HANDLE_FORMS_SHOW_ALERT,
+  };
+}
